@@ -13,13 +13,33 @@
   import { traces } from "$lib/data/plotdata.js";
   import * as echarts from "echarts";
   import { echartOptions } from "$lib/data/echartsdata.js";
-  import { Chart, type EChartsOptions } from "svelte-echarts";
+  import {
+    Chart,
+    chartable,
+    type EChartsOptions,
+  } from "$lib/svelte-echarts/dist/index.js";
+  import { onMount } from "svelte";
 
   const layout: Partial<Layout> = {
     title: "event chart",
   };
-
+  let echartPlot: HTMLElement = document.createElement("div");
   let plot: HTMLDivElement = document.createElement("div");
+  onMount(() => {
+    let methods = chartable(echartPlot, { options: echartOptions });
+    const instance = methods.getInstance();
+    methods.getInstance().on("click", (data) => {
+      instance.dispatchAction({
+        type: "highlight", // use downplay to reverse the highlight effect
+        seriesIndex: 0,
+        dataIndex: 3,
+      });
+      console.log(data);
+    });
+	instance.
+
+  });
+
   //   Plotly.newPlot(plot, traces, layout);
   const hoverHandler = function (data: CustomEvent<PlotHoverEvent>): void {
     // console.log(data);
@@ -60,7 +80,6 @@
 
     // 4. /@ts-expect-error - css selector must be called storkewidth.
     // svgPoint.css("stroke-width", "3px")
-
     console.log(pathElement);
     // Problem is stroke and other attributes are wrapped in style tag so w
     // cannot easily modify them
@@ -97,8 +116,8 @@
     on:unhover={unhoverHandler}
     bind:element={plot}
   />
-  <div class="app">
-    <Chart options={echartOptions} />
+  <div class="app" bind:this={echartPlot}>
+    <!-- <Chart options={echartOptions}/> -->
   </div>
 </section>
 
