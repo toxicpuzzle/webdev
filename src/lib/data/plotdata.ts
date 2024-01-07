@@ -16,7 +16,6 @@ export const traces: Partial<PlotData>[] = [
     {
         x: [2, 3, 4, 5, 6],
         y: ['AT1', 'AT2', 'AT3', 'AT4', 'AT5'],
-
         type: 'scatter',
         mode: 'markers',
         name: 'Order Validation',
