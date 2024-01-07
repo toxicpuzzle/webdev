@@ -42,14 +42,18 @@
 	// Problem is that it cannot change css tags with - inside
 	const svgPoint = SVG(pathElement);
 	svgPoint.stroke({width: 10})
-	svgPoint.css({ fill: "yellow", stroke: "black", strokeWidth: "2px", fillOpacity: "0.5" });
+	svgPoint.css({ fill: "yellow", stroke: "black", strokeWidth: "2px", fillOpacity: "0.5"});
 	svgPoint.scale(1.2);
 
 	svgPoint.fill({color:'green'})
 	svgPoint.stroke({width: 10, color: '#508484'})
 
-	// @ts-expect-error - css selector must be called storkewidth.
-	svgPoint.css("stroke-width", "3px")
+	// One way of hacking so that strokewidth could be set
+	const style = {"stroke-width": "2px", "opacity": '0.5'}
+	svgPoint.css(style);
+
+	// /@ts-expect-error - css selector must be called storkewidth.
+	// svgPoint.css("stroke-width", "3px")
 
 	console.log(pathElement);
 	// Problem is stroke and other attributes are wrapped in style tag so w
