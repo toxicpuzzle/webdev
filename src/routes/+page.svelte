@@ -8,7 +8,7 @@
     PlotlyHTMLElement,
   } from "plotly.js";
   //   import * as Plotly from 'plotly.js'
-  import { SVG } from '@svgdotjs/svg.js'
+  import { SVG, defaults, utils } from '@svgdotjs/svg.js'
   import { traces } from "$lib/data/plotdata.js";
 
   const layout: Partial<Layout> = {
@@ -39,8 +39,21 @@
       element[0].children[0].getElementsByClassName("point")[0];
 
 	// SVG way of adding scaling transform.
+	// Problem is that it cannot change css tags with - inside
 	const svgPoint = SVG(pathElement);
+	svgPoint.stroke({width: 10})
+	svgPoint.css({ fill: "yellow", stroke: "black", strokeWidth: "2px", fillOpacity: "0.5" });
 	svgPoint.scale(1.2);
+
+	svgPoint.fill({color:'green'})
+	svgPoint.stroke({width: 10, color: '#508484'})
+
+	// @ts-expect-error - css selector must be called storkewidth.
+	svgPoint.css("stroke-width", "3px")
+
+	console.log(pathElement);
+	// Problem is stroke and other attributes are wrapped in style tag so w
+	// cannot easily modify them
 
 	// Plain JS way of mainpulating dom
 	// let transformAttr = pathElement.getAttribute("transform");
@@ -48,6 +61,8 @@
     // transformAttr += " scale(2)";
     // // Set the modified transform attribute back
     // pathElement.setAttribute("transform", transformAttr!);
+	
+
 	
 
 
