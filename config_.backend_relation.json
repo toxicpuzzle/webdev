@@ -1,0 +1,40 @@
+{
+    "from": "inserts_data",
+    "to" : "private_trades_data",
+    "from_key" : ["transaction_id"],
+    "to_key" : ["transaction_id"],
+    "onhover_effect": "highlight",
+
+
+    "name": "inserts_data",
+    "values" : [
+        {
+            "publish_time": 100,
+            "t0": 100,
+            "t8": 1000,
+            "exchange_timestamp": 1024,
+            "dd_group_key": "yxisap",
+            "eml": "link_1",
+            "username": "elx_123",
+            "volume": "123"
+        }
+    ],
+    "traces_atts": [
+        "publlsh_time",
+        "t0",
+        "t8",
+        "exchange_timestamp"
+    ],
+    "aggregable_atts": [
+        "username",
+        "eml"
+    ],
+    "filterable_atts": [
+        
+    ],
+    "onhover_atts" :[
+        "can include any thin in values[0] or a value from a related attribute"
+    ]
+    
+
+}
