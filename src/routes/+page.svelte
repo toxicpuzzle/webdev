@@ -20,9 +20,11 @@
   //   Plotly.newPlot(plot, traces, layout);
   const hoverHandler = function (data: CustomEvent<PlotHoverEvent>): void {
     // console.log(data);
-    // const point = data.detail.points[0];
-    // console.log("hovering over point with index ", point.pointIndex,
-    // 			"on trace", point.data.name, "and trace number", point.curveNumber);
+    const point = data.detail.points[0];
+    console.log("hovering over point with index ", point.pointIndex,
+    			"on trace", point.data.name, "and trace number", point.curveNumber);
+    traces[point.curveNumber].marker.size[point.pointIndex] *= 1.1;
+
     // const marker = traces[point.curveNumber].marker;
     // if (Array.isArray(traces[point.curveNumber].marker!.color)) {
     // 	(traces[point.curveNumber].marker!.color as string[])[point.pointIndex] = 'black';
@@ -34,10 +36,16 @@
 
   const unhoverHandler = function (data: CustomEvent<PlotMouseEvent>): void {
 	
-    const element = document.getElementsByClassName("scatterlayer mlayer");
-    // console.log(element[0].children[0].getElementsByClassName("point")[0]);
-    const pathElement =
-      element[0].children[0].getElementsByClassName("point")[0];
+    const point = data.detail.points[0];
+    console.log("hovering over point with index ", point.pointIndex,
+    			"on trace", point.data.name, "and trace number", point.curveNumber);
+    traces[point.curveNumber].marker.size[point.pointIndex] *= 1/1.1;
+
+
+    // const element = document.getElementsByClassName("scatterlayer mlayer");
+    // // console.log(element[0].children[0].getElementsByClassName("point")[0]);
+    // const pathElement =
+    //   element[0].children[0].getElementsByClassName("point")[0];
 
 	// 1. SVG way of adding scaling transform.
 	// Problem is that it cannot change css tags with - inside
@@ -51,7 +59,7 @@
 
 
 	// 2. d3 way of changing style, no type hints but no jank errors either
-	d3.select(pathElement).style("stroke-width", "5px")
+	// d3.select(pathElement).style("stroke-width", "5px")
 
 	// 3. // One way of hacking so that strokewidth could be set
 	// const style = {"stroke-width": "2px", "opacity": '0.5'}
@@ -60,7 +68,7 @@
 	// 4. /@ts-expect-error - css selector must be called storkewidth.
 	// svgPoint.css("stroke-width", "3px")
 
-	console.log(pathElement);
+	// console.log(pathElement);
 	// Problem is stroke and other attributes are wrapped in style tag so w
 	// cannot easily modify them
 
