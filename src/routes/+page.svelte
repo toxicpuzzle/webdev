@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Plot from "../../node_modules/svelte-plotly.js";
+  import Plot from 'svelte-plotly.js'
   import type {
     Layout,
     PlotData,
