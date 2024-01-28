@@ -11,9 +11,13 @@
   //   import * as Plotly from 'plotly.js'
   import { SVG, defaults, utils } from '@svgdotjs/svg.js'
   import { traces } from "$lib/data/plotdata.js";
-
+  import Legend from '$lib/components/legend/legend.svelte'
+  import Diamond from '$lib/components/legend/svg/diamond.svelte';
+  import Test from '$lib/components/legend/svg/test.svelte';
   const layout: Partial<Layout> = {
     title: "event chart",
+    height: 500,
+    width: 500
   };
 
   let plot: HTMLDivElement = document.createElement("div");
@@ -39,7 +43,7 @@
     const point = data.detail.points[0];
     console.log("hovering over point with index ", point.pointIndex,
     			"on trace", point.data.name, "and trace number", point.curveNumber);
-    traces[point.curveNumber].marker.size[point.pointIndex] *= 1/1.1;
+    // traces[point.curveNumber].marker.size[point.pointIndex] *= 1/1.1;
 
 
     // const element = document.getElementsByClassName("scatterlayer mlayer");
@@ -100,10 +104,15 @@
   <Plot
     data={traces}
     {layout}
-    on:hover={hoverHandler}
+    on:click={hoverHandler}
     on:unhover={unhoverHandler}
     bind:element={plot}
   />
+  <button class="btn variant-filled">Something</button>
+  <Legend/>
+  <div class="w-5 h-5">
+    <Test></Test>
+  </div>
 </section>
 
 <style>
