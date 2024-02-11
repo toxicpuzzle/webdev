@@ -7,10 +7,16 @@ documentation part.
 
 # How to use this tool
 
-# Extending Sonar
+# Vision for tool
+
+1. Configs currently in frontend should become fully market agnostic only, and that
+we have a piplein to process any/all configs from market specific data i.e. backend 
+will give data used by frontend to auto generate configs for e.g. hovering e.t.c.
+
+# Extending Sonar 
 
 Guide on how to add market specific features with an example e.g. mapping from data to matching engine by
-instrument for XNSE
+instrument for XNSE. 
 
 ## Backend Changes
 
